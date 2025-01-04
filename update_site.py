@@ -1,25 +1,10 @@
 import os
 
-filePaths = []
-
 baseDir = os.getcwd()
 
-# baseDir = os.path.dirname(baseDir)
-# baseDir = os.path.dirname(baseDir)
+filePath = os.path.join(baseDir, "assets", "imagePaths.js")
 
-print(baseDir+"//assets//imagePaths.js")
+os.makedirs(os.path.dirname(filePath), exist_ok=True)
 
-f = open(baseDir+"//assets//imagePaths.js", "w")
-
-f.write("test2")
-
-# def writeAllImages(prefix):
-#     contents = os.listdir(prefix)
-#     for item in contents:
-#         if("." not in item):
-#             newPath = prefix+"//"+item
-#             writeAllImages(newPath)
-#         else:
-#             suffix = item.split(".")[len(item.split("."))-1].lower()
-#             if suffix in ["svg", "png", "jpg", "jpeg"]:
-#                 f.write("'"+(prefix.removeprefix(baseDir+"//")+"//"+item).replace("//", "/")+"',\n")
+with open(filePath, "w") as f:
+    f.write("test3")
