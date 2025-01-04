@@ -1,1 +1,8 @@
-{"message":"Hello, world!"}
+{
+    "stories": [
+        {
+            "title": "This is a test story/announcement",
+            "picture": "duck.jpg"
+        }
+    ]
+}
