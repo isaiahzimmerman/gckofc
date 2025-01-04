@@ -15,23 +15,10 @@ document.addEventListener("DOMContentLoaded", function()
     drawImages()
 })
 
-async function getJSON(path){
-    try {
-        const response = await fetch(path);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching JSON:', error);
-        return null;
-    }
-}
-
 function drawImages(){
     //done this way because getJSON uses asynchronous functions
     const parent = document.getElementById("images")
-    getJSON('../assets/imagePaths.json')
+    getJSON('/assets/imagePaths.json')
         .then(data => {
             data.imagePaths.forEach(function(element){
                 const currentElement = document.createElement("img")
