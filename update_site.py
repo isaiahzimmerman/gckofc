@@ -9,15 +9,15 @@ imagesPath = os.path.join(baseDir, "assets", "images")
 outputPath = os.path.join(baseDir, "assets", "imagePaths.json")
 os.makedirs(os.path.dirname(outputPath), exist_ok=True)
 
+print(imagesPath)
+
 with open(outputPath, "w") as f:
-    def writeAllImages(prefix):
-        contents = os.listdir(prefix)
-        for item in contents:
-            if("." not in item):
-                newPath = prefix+"//"+item
-                writeAllImages(newPath)
-            else:
-                suffix = item.split(".")[len(item.split("."))-1].lower()
-                if suffix in ["svg", "png", "jpg", "jpeg"]:
-                    f.write("'"+(prefix.removeprefix(baseDir+"//")+"//"+item).replace("//", "/")+"',\n")
-    writeAllImages(imagesPath)
+    f.write('{"imagePaths":[')
+    contents = os.listdir(imagesPath)
+    for index, item in enumerate(contents):
+        suffix = item.split(".")[len(item.split("."))-1].lower()
+        if suffix in ["svg", "png", "jpg", "jpeg"]:
+            f.write('"'+item+'"')
+        if(index+1 != len(contents)):
+            f.write(',')
+    f.write(']}')
