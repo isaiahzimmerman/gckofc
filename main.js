@@ -16,7 +16,8 @@ function processStories(stories){
         const storyDiv = document.createElement("div")
         storyDiv.classList.add("story")
         
-        const storyTitle = document.createElement("h1")
+        const storyTitle = document.createElement("div")
+        storyTitle.classList.add("story_title")
         storyTitle.textContent = story.title
         storyDiv.appendChild(storyTitle)
 
