@@ -28,7 +28,7 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add assets/imagePaths.js
-          git commit -m "Update imagePaths.js"
+          git commit -m "Update imagePaths.json"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
