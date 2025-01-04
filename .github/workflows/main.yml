@@ -27,8 +27,13 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add assets/imagePaths.json
-          git commit -m "Update imagePaths.json"
-          git push origin main
+
+          if [[ `git status --porcelain` ]]; then
+            git add assets/imagePaths.json
+            git commit -m "Update imagePaths.json"
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
