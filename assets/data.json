@@ -12,6 +12,12 @@
             "picture": "duck.jpg",
             "dateCreated": "1-2-2024",
             "content": "don't worry about it"
+        },
+        {
+            "title": "Another Test",
+            "picture": "duck.jpg",
+            "dateCreated": "1-2-2024",
+            "content": "don't worry about it"
         }
     ]
 }

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function processSiteData(data){
     //process stories
-    processStories(data.stories)
+    // processStories(data.stories)
 }
 
 function processStories(stories){

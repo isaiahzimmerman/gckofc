@@ -6,10 +6,13 @@
     <title>Grove City Knights of Columbus</title>
     <script src="/assets/getJSON.js"></script>
     <script src="main.js"></script>
+    <script src="resize.js"></script>
+    <script src="footer.js"></script>
     <link rel="stylesheet" href="general.css">
     <link rel="stylesheet" href="stories.css">
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="site_title.css">
+    <link rel="stylesheet" href="footer.css">
 </head>
 <body>
     <div class="header">
@@ -21,7 +24,7 @@
     <div class="site_title">
         <img class="site_title_image" src="/assets/images/duck.jpg" alt="">
         <div class="site_title_title">
-            <div>
+            <div class="site_title_title_words">
                 <div>Grove City</div>
                 <div>Knights of Columbus</div>
                 <div>Council 3658</div>
@@ -39,8 +42,61 @@
 
     <div class="spacing"></div>
 
-    <div class="site_body" id="stories">
-        
+    <div class="site_body recent_and_stories">
+        <div class="recent_container">
+            <div class="section_header">Recent</div>
+            <div>
+                <div>x</div>
+                <div>x</div>
+                <div>x</div>
+                <div>x</div>
+            </div>
+        </div>
+
+        <div class="spacing recent_and_stories_spacing"></div>
+
+        <div class="stories_container">
+            <div class="section_header">Stories</div>
+            <div id="stories">
+                <div class="story">
+                    <div class="story_graphic">
+                        <div class="story_date">
+                            <div class="story_month">JAN</div>
+                            <div class="story_day">10</div>
+                        </div>
+                        <img class="story_image" src="assets/images/otter.jpg" alt="">
+                    </div>
+                    <div class="story_info">
+                        <div>Day, TT:TT - TT:TT</div>
+                        <div class="story_title">This is a test story</div>
+                        <div class="story_description">such and such happened</div>
+                    </div>
+                </div>
+                <div class="story">
+                    <div class="story_graphic">
+                        <div class="story_date">
+                            <div class="story_month">JAN</div>
+                            <div class="story_day">10</div>
+                        </div>
+                        <img class="story_image" src="assets/images/otter.jpg" alt="">
+                    </div>
+                    <div class="story_info">
+                        <div>Day, TT:TT - TT:TT</div>
+                        <div class="story_title">This is a test story</div>
+                        <div class="story_description">such and such happened</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="spacing"></div>
+
+    <div class="footer">
+        <div>Visit us on <a>Facebook</a></div>
+        <div>© <span id="footer_current_year"></span> Grove City Knights of Columbus Council 3658. All rights reserved.</div>
+    </div>
+
+    <div class="spacing"></div>
 </body>
 </html>

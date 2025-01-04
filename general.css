@@ -37,6 +37,6 @@ body {
 }
 
 .site_body{
-    width: 80%;
+    width: min(80%, 800rem);
     margin: 0 auto;
 }

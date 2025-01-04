@@ -1,17 +1,88 @@
 .story{
-    outline: 1px solid black;
-    width: 45%;
+    /* outline: 1px solid black; */
+    width: 100%;
+    max-width: 30rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     text-align: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.mobile .story{
+    /* flex-direction: column; */
 }
 
 #stories{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 1rem;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
 }
 
 .story_title {
     font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.story_image{
+    width: 80%;
+    aspect-ratio: 5/4;
+    object-fit: cover;
+}
+
+.story_date{
+    height: 60%;
+    aspect-ratio: 1;
+    overflow-x: hidden;
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    font-weight: 600;
+}
+
+.story_graphic{
+    width: 45%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: right;
+}
+
+.story_info{
+    width: 55%;
+}
+
+.recent_and_stories{
+    display: flex;
+}
+
+.recent_and_stories_spacing{
+    display: none;
+}
+
+.mobile{
+    .recent_and_stories{
+        flex-direction: column;
+    }
+
+    .recent_and_stories_spacing{
+        display: block;
+    }
+}
+
+.stories_container{
+    flex: 1
+}
+
+.recent_container{
+    flex: 1;
 }
