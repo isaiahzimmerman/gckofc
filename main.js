@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function(){
 function processSiteData(data){
     //process stories
     // processStories(data.stories)
+    processImages(data.images.home)
+    
 }
 
 function processStories(stories){
@@ -27,4 +29,10 @@ function processStories(stories){
 
         storiesDiv.appendChild(storyDiv)
     })
+}
+
+function processImages(images){
+    for(const [key, value] of Object.entries(images)){
+        document.getElementById(key).src = `/assets/images/${value}`;
+    }
 }

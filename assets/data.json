@@ -19,5 +19,11 @@
             "dateCreated": "1-2-2024",
             "content": "don't worry about it"
         }
-    ]
+    ],
+    "images": {
+        "home": {
+            "site_title_emblem": "emblem.png",
+            "site_title_image": "2024 veterens day Parade.jpg"
+        }
+    }
 }
