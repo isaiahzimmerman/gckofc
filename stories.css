@@ -7,7 +7,7 @@
     align-items: center;
     text-align: center;
     gap: 0.5rem;
-    font-size: 1rem;
+    font-size: calc(var(--pss) * 1);
 }
 
 .mobile .story{
@@ -17,7 +17,7 @@
 #stories{
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: calc(var(--pss) * 1);
     flex-direction: column;
     flex: 1;
     align-items: center;
@@ -25,7 +25,7 @@
 
 .story_title {
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: calc(var(--pss) * 1.25);
 }
 
 .story_image{
@@ -85,4 +85,9 @@
 
 .recent_container{
     flex: 1;
+}
+
+.story-date-display{
+    font-size: calc(var(--pss) * 1);
+    color: blue;
 }

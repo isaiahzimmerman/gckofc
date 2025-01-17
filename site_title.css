@@ -1,17 +1,17 @@
 .site_title{
     position: relative;
     width: 100%;
-    height: 20rem;
+    height: calc(var(--pss) * 25);
     overflow: hidden;
 }
 
 .site_title_title{
     position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    width: calc(100% - 2rem);
+    bottom: calc(var(--pss) * 1);
+    left: calc(var(--pss) * 1);
+    width: calc(100% - var(--pss) * 2);
     flex-wrap: wrap;
-    font-size: min(6vw, 2.5rem);
+    font-size: calc(var(--pss) * 2.5);
     font-weight: 600;
     display: flex;
     justify-content: space-between;
@@ -28,7 +28,7 @@
 }
 
 .site_title_emblem{
-    height: min(24vw, 10rem);
+    height: calc(var(--pss) * 10);
     aspect-ratio: 1;
     object-fit: contain;
 }
@@ -36,11 +36,11 @@
 .site_title_title_words{
     display: flex;
     flex-direction: column;
-    gap: min(.6vw, .25rem);
+    gap: calc(var(--pss) * 0.25);
 }
 
 .site_title_title_words div{
     background-color: rgba(255, 255, 255, 0.575);
     width: fit-content;
-    padding: min(.6vw, .25rem);
+    padding: calc(var(--pss) * 0.25);
 }

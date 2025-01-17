@@ -1,4 +1,19 @@
 .header{
     display: flex;
     background-color: var(--theme-bg);
+    /* gap: calc(var(--pss) * 1); */
+    font-size: calc(var(--pss) * 2);
+    justify-content: space-evenly;
+}
+
+.header_item{
+    padding: calc(var(--pss) * 0.5);
+    margin: calc(var(--pss) * 0.5);
+    transition: background-color 0.5s;
+    border-radius: calc(var(--pss) * 0.5);
+}
+
+.header_item:hover{
+    background-color: antiquewhite;
+    cursor: pointer;
 }
