@@ -9,6 +9,8 @@
     <script src="resize.js"></script>
     <script src="footer.js"></script>
     <script src="/assets/js/date.js"></script>
+    <script src="/assets/js/generateICS.js"></script>
+
     <link rel="stylesheet" href="colors.css">
     <link rel="stylesheet" href="general.css">
     <link rel="stylesheet" href="stories.css">
@@ -16,14 +18,15 @@
     <link rel="stylesheet" href="site_title.css">
     <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="officers.css">
+    <link rel="stylesheet" href="about.css">
 </head>
 <body>
     <div class="header">
-        <a href="/">
+        <a href="/" class="header_link">
             <div class="header_logo_container"><img class="header_logo" src="/assets/images/logo.png" alt=""></div>
         </a>
 
-        <a href="/">
+        <a href="/" class="header_link">
             <div class="header_item">Home</div>
         </a>
 
@@ -50,10 +53,44 @@
 
     <div class="spacing"></div>
 
-    <div class="site_body section_header centered">About us</div>
+    <div class="site_body section_header centered">Who are the Knights?</div>
     <div class="site_body">
-        We are the Grove City Knights of Columbus. We love to serve our community.
+        <div class="centered">
+            The Knights of Columbus is a Catholic fraternal organization founded in 1882 by Blessed Michael J. McGivney. It is a global organization limited to practicing Catholic men, dedicated to charitable, religious, and social welfare works, providing mutual aid, insurance products, and assistance to members and their families.
+        </div>
+        <div class="spacing"></div>
+        <div class="about_values">
+            <div class="about_value">
+                <div class="about_value_image_container">
+                    <img src="/assets/icons/charity.svg" class="about_value_image_container" alt="">
+                </div>
+                <div class="about_value_title">Charity</div>
+                <div class="about_value_desc">The Knights of Columbus fundraises for and donates to many local, national and international charities.</div>
+            </div>
+            <div class="about_value">
+                <div class="about_value_image_container">
+                    <img src="/assets/icons/charity.svg" class="about_value_image_container" alt="">
+                </div>
+                <div class="about_value_title">Unity</div>
+                <div class="about_value_desc">We are stronger together. When we work as one we can accomplish more.</div>
+            </div>
+            <div class="about_value">
+                <div class="about_value_image_container">
+                    <img src="/assets/icons/charity.svg" class="about_value_image_container" alt="">
+                </div>
+                <div class="about_value_title">Fraternity</div>
+                <div class="about_value_desc">Banding together isn’t just for fundraising. We need to spend time with our brothers as well.</div>
+            </div>
+            <div class="about_value">
+                <div class="about_value_image_container">
+                    <img src="/assets/icons/charity.svg" class="about_value_image_container" alt="">
+                </div>
+                <div class="about_value_title">Patriotism</div>
+                <div class="about_value_desc">Love of Country and service to our veterans and their families is an important roles that councils fill.</div>
+            </div>
+        </div>
     </div>
+    
 
     <div class="spacing"></div>
 

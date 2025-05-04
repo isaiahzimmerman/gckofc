@@ -9,8 +9,25 @@ document.addEventListener("DOMContentLoaded", function(){
         const storyID = params.get("id")
 
         drawEventSite(data.stories[storyID]);
+
+        document.getElementById("event_dates_range").addEventListener("click", function(){
+            addEventToCalendar(data.stories[storyID])
+        })
     })
 })
+
+function addEventToCalendar(story){
+    const startDate = new Date(story.startDate.year, story.startDate.month, story.startDate.day, story.startDate.time.hour, story.startDate.time.minute)
+    const endDate = new Date(story.endDate.year, story.endDate.month, story.endDate.day, story.endDate.time.hour, story.endDate.time.minute)
+
+    generateIcsInvite({
+        title: story.title,
+        description: story.shortDescription,
+        location: story.location,
+        startDate: startDate,
+        endDate: endDate
+    });
+}
 
 function drawEventSite(story){
     document.title = story.title
@@ -18,4 +35,5 @@ function drawEventSite(story){
     document.getElementById("event_title").innerHTML = story.title
     document.getElementById("event_dates_range").innerHTML = getDayText(story)
     document.getElementById("event_content").innerHTML = story.content
+    document.getElementById("event_image").src = `/assets/images/${story.picture}`
 }

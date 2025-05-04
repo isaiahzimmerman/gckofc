@@ -120,7 +120,7 @@ function hideImageSelector(){
 }
 
 function saveElement(id, type){
-    let textContent = document.getElementById(id).querySelector('input').value
+    let textContent = document.getElementById(id).querySelector('textarea').value
     textContent = textContent ? textContent : "please provide text!"
 
     const newElement = makeElementEditable(type, id, textContent)
@@ -144,8 +144,7 @@ function editElement(id, message, type){
     console.log(id)
     const textInputContainer = document.createElement('div')
 
-    const textInput = document.createElement('input')
-    textInput.type = 'text'
+    const textInput = document.createElement('textarea')
     textInput.value = message
 
     const saveTextInput = document.createElement('span')

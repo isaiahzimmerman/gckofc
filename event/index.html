@@ -13,16 +13,19 @@
 
     <link rel="stylesheet" href="/event/event.css">
     <link rel="stylesheet" href="/colors.css">
+    <link rel="stylesheet" href="/footer.css">
 
     <script src="main.js"></script>
+    <script src="/footer.js"></script>
+    <script src="/assets/js/generateICS.js"></script>
 </head>
 <body>
     <div class="header">
-        <a href="/">
+        <a href="/" class="header_link">
             <div class="header_logo_container"><img class="header_logo" src="/assets/images/logo.png" alt=""></div>
         </a>
 
-        <a href="/">
+        <a href="/" class="header_link">
             <div class="header_item">Home</div>
         </a>
 
@@ -46,14 +49,24 @@
             <div class="event_calendar_icon">
                 <img src="/assets/icons/calendar.svg" alt="">
             </div>
-            <div class="event_dates_range" id="event_dates_range">
-                February DS, 10:SD AM - SD 1, 8:SD PM
-            </div>
+            <div class="event_dates_range" id="event_dates_range"></div>
         </div>
 
-        <div class="section_header centered" id="event_title">This is a test story/announcement</div>
-
-        <div id="event_content">Join us for this event! There will be refreshments provided et cetera</div>
+        <div class="section_header centered" id="event_title"></div>
     </div>
+    <div class="event_image site_body">
+        <img  id="event_image" src="" alt="">
+    </div>
+    <div class="spacing"></div>
+    <div class="site_body centered">
+        <div id="event_content"></div>
+    </div>
+    <div class="spacing"></div>
+
+    <div class="footer">
+        <div>© <span id="footer_current_year"></span> Grove City Knights of Columbus Council 3658. All rights reserved.</div>
+    </div>
+
+    <div class="spacing"></div>
 </body>
 </html>
