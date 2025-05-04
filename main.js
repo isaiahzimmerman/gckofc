@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
-    getJSON('/assets/data.json')
+    getJSON('/assets/json/data.json')
         .then(data => {
             processSiteData(data)
         })
@@ -9,73 +9,7 @@ function processSiteData(data){
     //process stories
     processStories(data.stories)
     processImages(data.images.home)
-}
-
-function getDaysApart(date1, date2) {
-    const day1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
-    const day2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
-
-    const difference = day2 - day1;
-
-    return difference / (24 * 60 * 60 * 1000);
-}
-
-function areDatesOnSameDay(date1, date2) {
-    return (
-        date1.getFullYear() === date2.getFullYear() &&
-        date1.getMonth() === date2.getMonth() &&
-        date1.getDate() === date2.getDate()
-    );
-}
-
-function formatTimeWithAmPm(date) {
-    let hours = date.getHours();
-    const minutes = date.getMinutes();
-    const amPm = hours >= 12 ? 'PM' : 'AM';
-
-    hours = hours % 12 || 12;
-
-    const formattedMinutes = minutes.toString().padStart(2, '0');
-
-    return `${hours}:${formattedMinutes} ${amPm}`;
-}
-
-function getRelativeDayDescriptor(date){
-    const now = new Date()
-    const daysApart = getDaysApart(now, date)
-    if(daysApart === 1){
-        return `Tomorrow`
-    }else if(daysApart < 7){
-        return getFullDayOfWeek(date)
-    }else if(now.getFullYear() === date.getFullYear()){
-        return `${getMonthName(date)} ${date.getDate()}`
-    }else{
-        return `${getMonthName(date)} ${date.getDate()}, ${date.getFullYear()}`
-    }
-}
-
-function getFullDayOfWeek(date) {
-    return date.toLocaleDateString('en-US', { weekday: 'long' });
-}
-
-function getMonthName(date) {
-    return new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
-}
-
-function getDayText(story){
-    const startDate = new Date(story.startDate.year, story.startDate.month, story.startDate.day, story.startDate.time.hour, story.startDate.time.minute)
-    const endDate = new Date(story.endDate.year, story.endDate.month, story.endDate.day, story.endDate.time.hour, story.endDate.time.minute)
-    const now = new Date()
-
-    const daysUntilStart = (startDate - now) / 86400000
-    const daysUntilEnd = (endDate - now) / 86400000
-
-    if(areDatesOnSameDay(startDate, endDate)){
-        return `${getRelativeDayDescriptor(startDate)}, ${formatTimeWithAmPm(startDate)} - ${formatTimeWithAmPm(endDate)}`
-    }else{
-        return `${getRelativeDayDescriptor(startDate)}, ${formatTimeWithAmPm(startDate)} - ${getRelativeDayDescriptor(endDate)}, ${formatTimeWithAmPm(endDate)}`
-    }
-    
+    processOfficers(data.officers)
 }
 
 function generateIcsInvite(eventDetails) {
@@ -120,7 +54,10 @@ END:VCALENDAR`.trim();
 function processStories(stories){
     const storiesDiv = document.getElementById("stories")
     storiesDiv.innerHTML = ""
-    stories.forEach(function(story){
+    console.log(stories)
+    for(const storyKey in stories){
+        const story = stories[storyKey]
+        
         const storyDiv = document.createElement("div")
         storyDiv.classList.add("story")
 
@@ -141,18 +78,23 @@ function processStories(stories){
             <div class="story_description">${story.content}</div>
         </div>`
 
+        storyDiv.addEventListener("click", function(){
+            console.log(story.title)
+            window.location.assign(`/event/?id=${story.id}&${story.title.replaceAll(" ", "_")}`);
+        })
+
         storiesDiv.appendChild(storyDiv)
 
-        storyDiv.onclick = function(){
-            generateIcsInvite({
-                title: story.title,
-                description: story.shortDescription,
-                location: story.location,
-                startDate: startDate,
-                endDate: endDate
-            });
-        }
-    })
+        // storyDiv.onclick = function(){
+        //     generateIcsInvite({
+        //         title: story.title,
+        //         description: story.shortDescription,
+        //         location: story.location,
+        //         startDate: startDate,
+        //         endDate: endDate
+        //     });
+        // }
+    }
     resizeAllItems()
     // Example usage
 }
@@ -160,5 +102,49 @@ function processStories(stories){
 function processImages(images){
     for(const [key, value] of Object.entries(images)){
         document.getElementById(key).src = `/assets/images/${value}`;
+    }
+}
+
+function processOfficers(officers){
+    /*
+    <div class="officer">
+        <div class="officer_image_container">
+            <img src="/assets/images/guy1.png" alt="" class="officer_image">
+        </div>
+        <div class="officer_name">Dennis Sansotta</div>
+        <div class="officer_title">Grand Knight</div>
+    </div>*/
+    const officersDiv = document.getElementById("officers")
+
+    officersDiv.innerHTML = ""
+
+    for(const officerID in officers){
+        const officer = officers[officerID]
+
+        const officerDiv = document.createElement("div")
+        officerDiv.classList.add("officer")
+
+        const officerImageContainer = document.createElement("div")
+        officerImageContainer.classList.add("officer_image_container")
+
+        const officerImage = document.createElement("img")
+        officerImage.classList.add("officer_image")
+        officerImage.src = `/assets/images/${officer.image}`
+
+        officerImageContainer.appendChild(officerImage)
+
+        const officerName = document.createElement("div")
+        officerName.classList.add("officer_name")
+        officerName.innerText = officer.name
+
+        const officerTitle = document.createElement("div")
+        officerTitle.classList.add("officer_title")
+        officerTitle.innerText = officer.title
+
+        officerDiv.appendChild(officerImageContainer)
+        officerDiv.appendChild(officerName)
+        officerDiv.appendChild(officerTitle)
+
+        officersDiv.appendChild(officerDiv)
     }
 }

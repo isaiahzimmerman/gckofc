@@ -1,0 +1,16 @@
+.event_dates{
+    height: calc(var(--pss) * 5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--pss) * 1.5);
+}
+
+.event_calendar_icon{
+    height: 65%;
+}
+
+.event_calendar_icon img{
+    object-fit: contain;
+    height: 100%;
+}

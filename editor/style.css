@@ -1,5 +1,55 @@
-#images img{
+#images img, .story_image{
     width: 10rem;
     height: 10rem;
     object-fit: contain;
+}
+
+.previewImage{
+    width: 10rem;
+    height: 10rem;
+    object-fit: contain;
+}
+
+#image_selector img{
+    min-width: 4rem;
+    width: 15vw;
+    max-width: 7rem;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+#image_selector{
+    display: none;
+    position: absolute;
+    flex-wrap: wrap;
+    width: 70vw;
+    justify-content: space-evenly;
+    background-color: blanchedalmond;
+    border: 0.5vw solid black;
+    border-radius: 1vw;
+    gap: 2vw;
+    z-index: 2;
+}
+
+#image_selector_bg{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.save_text{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.story{
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
 }

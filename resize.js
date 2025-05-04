@@ -4,7 +4,7 @@ window.addEventListener("resize", function(){
 })
 
 function checkDevice(){
-    if(window.innerWidth < 600){
+    if(window.innerWidth < 800){
         document.body.classList.remove("desktop")
         document.body.classList.add("mobile")
     }else{

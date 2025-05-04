@@ -4,21 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grove City Knights of Columbus</title>
-    <script src="/assets/getJSON.js"></script>
+    <script src="/assets/js/getJSON.js"></script>
     <script src="main.js"></script>
     <script src="resize.js"></script>
     <script src="footer.js"></script>
+    <script src="/assets/js/date.js"></script>
+    <link rel="stylesheet" href="colors.css">
     <link rel="stylesheet" href="general.css">
     <link rel="stylesheet" href="stories.css">
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="site_title.css">
     <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="officers.css">
 </head>
 <body>
     <div class="header">
-        <div class="header_item">Home</div>
+        <a href="/">
+            <div class="header_logo_container"><img class="header_logo" src="/assets/images/logo.png" alt=""></div>
+        </a>
+
+        <a href="/">
+            <div class="header_item">Home</div>
+        </a>
+
         <div class="header_item">Membership</div>
-        <div class="header_item">Pay Dues</div>
+        <a href="https://kofcpennsylvania.org/" class="header_link" target="_blank">
+            <div class="header_item">State</div>
+        </a>
+        <a href="https://www.kofc.org/" class="header_link" target="_blank">
+            <div class="header_item">Supreme</div>
+        </a>
     </div>
     
     <div class="site_title">
@@ -35,7 +50,7 @@
 
     <div class="spacing"></div>
 
-    <div class="site_body section_header">About us</div>
+    <div class="site_body section_header centered">About us</div>
     <div class="site_body">
         We are the Grove City Knights of Columbus. We love to serve our community.
     </div>
@@ -44,7 +59,7 @@
 
     <div class="site_body recent_and_stories">
         <div class="recent_container">
-            <div class="section_header">Recent</div>
+            <div class="section_header centered">Recent</div>
             <div>
                 <div>x</div>
                 <div>x</div>
@@ -56,7 +71,7 @@
         <div class="spacing recent_and_stories_spacing"></div>
 
         <div class="stories_container">
-            <div class="section_header">Upcoming Events</div>
+            <div class="section_header centered">Upcoming Events</div>
             <div id="stories">
                 <div class="story">
                     <div class="story_graphic">
@@ -92,8 +107,20 @@
 
     <div class="spacing"></div>
 
+    <div class="site_body section_header centered">Officers</div>
+    <div class="site_body" id="officers">
+        <div class="officer">
+            <div class="officer_image_container">
+                <img src="/assets/images/guy1.png" alt="" class="officer_image">
+            </div>
+            <div class="officer_name">Dennis Sansotta</div>
+            <div class="officer_title">Grand Knight</div>
+        </div>
+    </div>
+
+    <div class="spacing"></div>
+
     <div class="footer">
-        <div>Visit us on <a>Facebook</a></div>
         <div>© <span id="footer_current_year"></span> Grove City Knights of Columbus Council 3658. All rights reserved.</div>
     </div>
 

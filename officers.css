@@ -1,0 +1,33 @@
+.officer{
+    /* background-color: blue; */
+    width: calc(var(--pss) * 13);
+    text-align: center;
+}
+
+.officer_image_container{
+    width: 100%;
+    aspect-ratio: 3/4;
+}
+
+.officer_image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.officer_name{
+    font-weight: 600;
+    font-size: calc(var(--pss) * 1.5);
+}
+
+.officer_title{
+    font-style: italic;
+    font-size: calc(var(--pss) * 1.25);
+}
+
+#officers{
+    display: flex;
+    justify-content: space-around;
+    gap: calc(var(--pss) * 5);
+    flex-wrap: wrap;
+}

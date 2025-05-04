@@ -3,6 +3,7 @@
     width: 100%;
     height: calc(var(--pss) * 25);
     overflow: hidden;
+    font-family: Merriweather;
 }
 
 .site_title_title{
@@ -40,7 +41,7 @@
 }
 
 .site_title_title_words div{
-    background-color: rgba(255, 255, 255, 0.575);
+    background-color: rgba(255, 255, 255, 0.836);
     width: fit-content;
     padding: calc(var(--pss) * 0.25);
 }

@@ -8,6 +8,7 @@
     text-align: center;
     gap: 0.5rem;
     font-size: calc(var(--pss) * 1);
+    cursor: pointer;
 }
 
 .mobile .story{
@@ -38,7 +39,7 @@
     height: 60%;
     aspect-ratio: 1;
     overflow-x: hidden;
-    background-color: aquamarine;
+    background-color: var(--theme-yellow);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,5 +90,5 @@
 
 .story-date-display{
     font-size: calc(var(--pss) * 1);
-    color: blue;
+    color: var(--theme-red);
 }
