@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function(){
     getJSON('/assets/json/data.json')
-        .then(data => {
-            processSiteData(data)
-        })
+    .then(data => {
+        processSiteData(data)
+
+        linkEditor()
+    })
 })
 
 function processSiteData(data){
@@ -10,6 +12,7 @@ function processSiteData(data){
     processStories(data.stories)
     processImages(data.images.home)
     processOfficers(data.officers)
+    processBlog(data.blog_posts)
 }
 
 function processStories(stories){
@@ -18,8 +21,41 @@ function processStories(stories){
     console.log(stories)
     for(const storyKey in stories){
         const story = stories[storyKey]
+
+        const requiredAttributes = ["title", "shortDescription"]
+
+        for(const attr of requiredAttributes){
+            if(!story[attr]){
+                story[attr] = `attribute "${attr}" is empty!`
+            }
+        }
+
+        if(!story.startDate){
+            story.startDate = {
+                year: 2000,
+                month: 1,
+                day: 1,
+                time: {
+                    hour: 0,
+                    minute: 0
+                }
+            }
+        }
+
+        if(!story.endDate){
+            story.endDate = {
+                year: 2000,
+                month: 1,
+                day: 1,
+                time: {
+                    hour: 0,
+                    minute: 0
+                }
+            }
+        }
         
-        const storyDiv = document.createElement("div")
+        const storyDiv = document.createElement("a")
+        storyDiv.href = `/event/?id=${story.id}&${story.title.replaceAll(" ", "_")}`
         storyDiv.classList.add("story")
 
         const startDate = new Date(story.startDate.year, story.startDate.month, story.startDate.day, story.startDate.time.hour, story.startDate.time.minute)
@@ -38,11 +74,6 @@ function processStories(stories){
             <div class="story_title">${story.title}</div>
             <div class="story_description">${story.shortDescription}</div>
         </div>`
-
-        storyDiv.addEventListener("click", function(){
-            console.log(story.title)
-            window.location.assign(`/event/?id=${story.id}&${story.title.replaceAll(" ", "_")}`);
-        })
 
         storiesDiv.appendChild(storyDiv)
 
@@ -94,6 +125,9 @@ function processOfficers(officers){
 
         officerImageContainer.appendChild(officerImage)
 
+        const officerNameAndTitleDiv = document.createElement("div")
+        officerNameAndTitleDiv.classList.add("officer_name_and_title")
+
         const officerName = document.createElement("div")
         officerName.classList.add("officer_name")
         officerName.innerText = officer.name
@@ -102,10 +136,28 @@ function processOfficers(officers){
         officerTitle.classList.add("officer_title")
         officerTitle.innerText = officer.title
 
-        officerDiv.appendChild(officerImageContainer)
-        officerDiv.appendChild(officerName)
-        officerDiv.appendChild(officerTitle)
+        officerNameAndTitleDiv.appendChild(officerName)
+        officerNameAndTitleDiv.appendChild(officerTitle)
 
+        officerDiv.appendChild(officerImageContainer)
+        officerDiv.appendChild(officerNameAndTitleDiv)
+    
         officersDiv.appendChild(officerDiv)
+    }
+}
+
+function processBlog(posts){
+    const blogDiv = document.getElementById("blog")
+
+    blogDiv.innerHTML = ""
+
+    for(const postKey in posts){
+        const post = posts[postKey]
+
+        const postTitle = document.createElement("div")
+        postTitle.classList.add("monthly_newsletter_title")
+        postTitle.innerText = post.title
+
+        blogDiv.appendChild(postTitle)
     }
 }

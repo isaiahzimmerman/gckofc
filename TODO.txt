@@ -1,1 +1,2 @@
 TODO: recolor icons to use charcoal color
+TODO: create word doc with instructions

@@ -81,18 +81,21 @@
             "name": "Jack Jackson",
             "image": "guy3.png",
             "id": "officer3"
-        },
-        "officer4": {
-            "title": "Grand Knight",
-            "name": "Jack Jackson",
-            "image": "guy3.png",
-            "id": "officer3"
-        },
-        "officer5": {
-            "title": "Grand Knight",
-            "name": "Jack Jackson",
-            "image": "guy3.png",
-            "id": "officer3"
+        }
+    },
+    "blog_posts": {
+        "202505": {
+            "title": "May 2025",
+            "content": [
+                {
+                    "type": "body",
+                    "text": "Hello Knights of Columbus!"
+                },
+                {
+                    "type": "body",
+                    "text": "We hope your break has been excellent."
+                }
+            ]
         }
     }
 }

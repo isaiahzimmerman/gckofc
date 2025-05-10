@@ -1,6 +1,6 @@
 .officer{
     /* background-color: blue; */
-    width: calc(var(--pss) * 13);
+    width: calc(var(--pss) * 9);
     text-align: center;
 }
 
@@ -17,17 +17,47 @@
 
 .officer_name{
     font-weight: 600;
-    font-size: calc(var(--pss) * 1.5);
+    font-size: calc(var(--pss) * 1.25);
 }
 
 .officer_title{
     font-style: italic;
-    font-size: calc(var(--pss) * 1.25);
+    font-size: calc(var(--pss) * 1);
 }
 
 #officers{
     display: flex;
     justify-content: space-around;
-    gap: calc(var(--pss) * 5);
+    gap: calc(var(--pss) * 2);
     flex-wrap: wrap;
+}
+
+.mobile #officers{
+    flex-direction: column;
+    gap: calc(var(--pss) * 2);
+}
+
+.mobile .officer_image_container{
+    width: calc(var(--pss) * 17);
+    object-fit: cover;
+    aspect-ratio: 4/5;
+}
+
+.mobile .officer{
+    display: flex;
+    width: 100%;
+    gap: calc(var(--pss) * 2);
+    align-items: center;
+}
+
+.mobile .officer_name_and_title{
+    width: 100%;
+}
+
+.mobile .officer_name{
+    font-size: calc(var(--pss) * 2);
+}
+
+.mobile .officer_title{
+    font-size: calc(var(--pss) * 1.6);
 }

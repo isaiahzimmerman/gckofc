@@ -1,7 +1,10 @@
-.story{
+a.story{
+    all: unset;
+    text-decoration: none;
+    color: inherit;
     /* outline: 1px solid black; */
     width: 100%;
-    max-width: 30rem;
+    max-width: calc(var(--pss) * 30);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -24,9 +27,11 @@
     align-items: center;
 }
 
-.story_title {
+.story_title, .story_title:visited{
     font-weight: 600;
     font-size: calc(var(--pss) * 1.25);
+    color: var(--theme-black);
+    text-decoration: none;
 }
 
 .story_image{

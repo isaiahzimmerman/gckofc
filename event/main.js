@@ -1,20 +1,33 @@
 document.addEventListener("DOMContentLoaded", function(){
     getJSON('/assets/json/data.json')
     .then(data => {
-        const url = new URL(window.location.href);
-        const params = new URLSearchParams(url.search);
+        processSiteData(data)
 
-        console.log(params)
-
-        const storyID = params.get("id")
-
-        drawEventSite(data.stories[storyID]);
-
-        document.getElementById("event_dates_range").addEventListener("click", function(){
-            addEventToCalendar(data.stories[storyID])
-        })
+        linkEditor()
     })
 })
+
+function processSiteData(data){
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+
+    console.log(params)
+
+    const storyID = params.get("id")
+    console.log(data.stories)
+    console.log(data.stories[storyID])
+
+    if(!data.stories[storyID]){
+        console.log(`404 story not found`)
+        return
+    }
+
+    drawEventSite(data.stories[storyID]);
+
+    document.getElementById("event_dates_range").addEventListener("click", function(){
+        addEventToCalendar(data.stories[storyID])
+    })
+}
 
 function addEventToCalendar(story){
     const startDate = new Date(story.startDate.year, story.startDate.month, story.startDate.day, story.startDate.time.hour, story.startDate.time.minute)

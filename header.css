@@ -6,6 +6,17 @@
     justify-content: space-evenly;
     align-items: center;
     font-family: Merriweather;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1;
+    height: calc(var(--pss) * 5);
+}
+
+.header_spacing{
+    height: calc(var(--pss) * 5);
+    background-color: var(--theme-blue);
 }
 
 .header_item{

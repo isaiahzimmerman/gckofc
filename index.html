@@ -7,9 +7,10 @@
     <script src="/assets/js/getJSON.js"></script>
     <script src="main.js"></script>
     <script src="resize.js"></script>
-    <script src="footer.js"></script>
+    <script src="/assets/js/footer.js"></script>
     <script src="/assets/js/date.js"></script>
     <script src="/assets/js/generateICS.js"></script>
+    <script src="/assets/js/editor.js"></script>
 
     <link rel="stylesheet" href="colors.css">
     <link rel="stylesheet" href="general.css">
@@ -19,8 +20,10 @@
     <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="officers.css">
     <link rel="stylesheet" href="about.css">
+    <link rel="stylesheet" href="newsletter.css">
 </head>
 <body>
+    <div class="header_spacing"></div>
     <div class="header">
         <a href="/" class="header_link">
             <div class="header_logo_container"><img class="header_logo" src="/assets/images/logo.png" alt=""></div>
@@ -90,19 +93,26 @@
             </div>
         </div>
     </div>
-    
+
+    <div class="spacing"></div>
+
+    <div class="site_body section_header centered">Officers</div>
+    <div class="site_body" id="officers">
+        <div class="officer">
+            <div class="officer_image_container">
+                <img src="/assets/images/guy1.png" alt="" class="officer_image">
+            </div>
+            <div class="officer_name">Dennis Sansotta</div>
+            <div class="officer_title">Grand Knight</div>
+        </div>
+    </div>    
 
     <div class="spacing"></div>
 
     <div class="site_body recent_and_stories">
         <div class="recent_container">
-            <div class="section_header centered">Recent</div>
-            <div>
-                <div>x</div>
-                <div>x</div>
-                <div>x</div>
-                <div>x</div>
-            </div>
+            <div class="section_header centered">Newsletter</div>
+            <div id="blog"></div>
         </div>
 
         <div class="spacing recent_and_stories_spacing"></div>
@@ -144,22 +154,7 @@
 
     <div class="spacing"></div>
 
-    <div class="site_body section_header centered">Officers</div>
-    <div class="site_body" id="officers">
-        <div class="officer">
-            <div class="officer_image_container">
-                <img src="/assets/images/guy1.png" alt="" class="officer_image">
-            </div>
-            <div class="officer_name">Dennis Sansotta</div>
-            <div class="officer_title">Grand Knight</div>
-        </div>
-    </div>
-
-    <div class="spacing"></div>
-
-    <div class="footer">
-        <div>© <span id="footer_current_year"></span> Grove City Knights of Columbus Council 3658. All rights reserved.</div>
-    </div>
+    <div class="footer" id="footer"></div>
 
     <div class="spacing"></div>
 </body>
