@@ -68,7 +68,7 @@ body{
 .editor{
     height: 100vh;
     overflow-y: scroll;
-    padding: 5px;
+    text-align: center;
 }
 
 .site_preview{

@@ -24,7 +24,7 @@ function processSiteData(data){
 
     drawEventSite(data.stories[storyID]);
 
-    document.getElementById("event_dates_range").addEventListener("click", function(){
+    document.getElementById("event_dates").addEventListener("click", function(){
         addEventToCalendar(data.stories[storyID])
     })
 }

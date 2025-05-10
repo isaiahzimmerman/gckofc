@@ -54,11 +54,11 @@ function reassignCurrentImage(newPath){
         siteData.images[a[0]][a[1]] = newPath
         updateSiteJSON()
     }else if(currentlyChanging.type == "story"){
-        setAttribute(currentlyChanging.spot, newPath)
+        setAttribute(currentlyChanging.spot, newPath, "stories")
     }else if(currentlyChanging.type == "officer"){
         const idAttrs = currentlyChanging.spot.split("_")
 
-        siteData.officers[idAttrs[0]].image = newPath
+        siteData.officers[idAttrs[1]].image = newPath
 
         updateSiteJSON()
     }
@@ -145,12 +145,12 @@ function hideImageSelector(){
     document.getElementById("image_selector").style.display = "none"
 }
 
-function saveElement(id, type){
+function saveElement(id, type, group){
     let textContent = document.getElementById(id).querySelector('textarea').value
     textContent = textContent ? textContent : "please provide text!"
 
-    const newElement = makeElementEditable(type, id, textContent)
-    setAttribute(id, textContent)
+    const newElement = makeElementEditable(type, id, textContent, group)
+    setAttribute(id, textContent, group)
 
     document.getElementById(id).innerHTML = ""
     document.getElementById(id).appendChild(newElement)
@@ -158,15 +158,16 @@ function saveElement(id, type){
     updateSiteJSON()
 }
 
-function setAttribute(htmlID, value){
+function setAttribute(htmlID, value, group){
+    console.log(group)
     const idAttrs = htmlID.split("_")
 
-    siteData.stories[idAttrs[1]][idAttrs[2]] = value
+    siteData[group][idAttrs[1]][idAttrs[2]] = value
 
     updateSiteJSON()
 }
 
-function editElement(id, message, type){
+function editElement(id, message, type, group){
     console.log(id)
     const textInputContainer = document.createElement('div')
 
@@ -177,7 +178,7 @@ function editElement(id, message, type){
     saveTextInput.classList.add('save_text')
     saveTextInput.addEventListener('click', function(){
         console.log(id)
-        saveElement(id, type)
+        saveElement(id, type, group)
     })
     saveTextInput.textContent = 'save'
 
@@ -188,14 +189,14 @@ function editElement(id, message, type){
     document.getElementById(id).appendChild(textInputContainer)
 }
 
-function makeElementEditable(type, id, message){
+function makeElementEditable(type, id, message, group){
     const elementContainer = document.createElement('div')
     elementContainer.id = id
 
     const element = document.createElement(type)
     element.innerText = message
     element.addEventListener('click', function(){
-        editElement(elementContainer.id, message, type)
+        editElement(elementContainer.id, message, type, group)
     })
 
     elementContainer.appendChild(element)
@@ -210,12 +211,125 @@ function createEditableElement(type, story, attribute){
     const element = document.createElement(type)
     element.innerText = story[attribute] ? story[attribute] : `attribute "${attribute}" is empty!`
     element.addEventListener('click', function(){
-        editElement(elementContainer.id, story[attribute], type)
+        editElement(elementContainer.id, story[attribute], type, "stories")
     })
 
     elementContainer.appendChild(element)
 
     return elementContainer
+}
+
+function createSpan(message){
+    const span = document.createElement("span")
+    span.innerText = message
+
+    return span
+}
+
+function customToDate(obj) {
+    const { year, month, day, time } = obj;
+    const { hour = 0, minute = 0 } = time || {};
+
+    const date = new Date(year, month, day, hour, minute);
+
+    if (isNaN(date.getTime())) {
+        throw new Error('Invalid date components');
+    }
+
+    return date;
+}
+
+function makeJSONDate(date){
+    return {
+        year: date.getFullYear(),
+        month: date.getMonth(),
+        day: date.getDate(),
+        time: {
+            hour: date.getHours(),
+            minute: date.getMinutes(),
+        }
+    }
+}
+
+function updateDateTime(id){
+    const dateStr = document.getElementById(`${id}_date`).value
+    const timeStr = document.getElementById(`${id}_time`).value;
+
+    const [year, month, day] = dateStr.split('-').map(Number);
+    const [hour, minute] = timeStr.split(':').map(Number);
+
+    const fullDate = new Date(year, month - 1, day, hour, minute);
+
+    console.log(fullDate)
+
+    const idAttrs = id.split("_")
+
+    console.log(fullDate)
+    if(!isNaN(fullDate.getTime())){
+        siteData.stories[idAttrs[0]][idAttrs[1]] = makeJSONDate(fullDate)
+
+        console.log(makeJSONDate(fullDate))
+
+        console.log(siteData.stories[idAttrs[0]][idAttrs[1]])
+
+        updateSiteJSON()
+    }
+}
+
+function formatDateToInputValue(date) {
+    if (!(date instanceof Date) || isNaN(date.getTime())) {
+        throw new Error('Invalid Date object');
+    }
+
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); // Month: 0-indexed
+    const dd = String(date.getDate()).padStart(2, '0');
+
+    return `${yyyy}-${mm}-${dd}`;
+}
+
+function formatDateToTime(date) {
+    if (!(date instanceof Date) || isNaN(date.getTime())) {
+        throw new Error('Invalid Date object');
+    }
+
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${hours}:${minutes}`;
+}
+
+
+function createEditableDateTime(title, id, attribute){
+    const dateDiv = document.createElement("div")
+
+    const dateDateInput = document.createElement("input")
+    dateDateInput.type = "date"
+    dateDateInput.id = `${id}_${attribute}_date`
+    dateDateInput.addEventListener("change", (e)=>{
+        updateDateTime(`${id}_${attribute}`)
+    })
+
+    const dateTimeInput = document.createElement("input")
+    dateTimeInput.type = "time"
+    dateTimeInput.id = `${id}_${attribute}_time`
+    dateTimeInput.addEventListener("change", (e)=>{
+        updateDateTime(`${id}_${attribute}`)
+    })
+
+    if(siteData.stories[id][attribute]){
+        const dateObject = customToDate(siteData.stories[id][attribute])
+
+        dateDateInput.value = formatDateToInputValue(dateObject)
+        dateTimeInput.value = formatDateToTime(dateObject)
+    }
+    
+    dateDiv.appendChild(createSpan(title+": "))
+    dateDiv.appendChild(dateDateInput)
+    dateDiv.appendChild(createSpan(" at "))
+    dateDiv.appendChild(dateTimeInput)
+
+    return dateDiv
 }
 
 function drawStoryEditor(data){
@@ -234,6 +348,9 @@ function drawStoryEditor(data){
         storyDiv.appendChild(createEditableElement('p', story, 'shortDescription'))
         storyDiv.appendChild(getStoryImage(story))
 
+        storyDiv.appendChild(createEditableDateTime("Start Date", `${story.id}`, "startDate"))
+        storyDiv.appendChild(createEditableDateTime("End Date", `${story.id}`, "endDate"))
+
         const deleteButton = document.createElement("button")
         deleteButton.addEventListener("click", ()=>{
             deleteStory(story.id)
@@ -250,22 +367,67 @@ function drawStoryEditor(data){
 
 function drawOfficersEditor(){
     const parent = document.getElementById("officers")
+    parent.innerHTML = ""
 
     for(const officerID in siteData.officers){
+        const officerDiv = document.createElement("div")
+
         const officer = siteData.officers[officerID]
         console.log(officer)
 
         const officerPicture = document.createElement("img")
         officerPicture.src = "/assets/images/"+officer.image
-        officerPicture.id = `${officerID}_picture`
+        officerPicture.id = `officer_${officerID}_picture`
         officerPicture.addEventListener('click', function(){
             createImageSelector(officerPicture.id, "officer")
         })
-        
-        parent.appendChild(officerPicture)
 
-        updateSiteJSON()
+        const officerName = makeElementEditable("div", `officer_${officer.id}_name`, officer.name, "officers")
+
+        const officerTitle = makeElementEditable("div", `officer_${officer.id}_title`, officer.title, "officers")
+
+        const deleteButton = document.createElement("button")
+        deleteButton.innerText = "delete officer"
+        deleteButton.addEventListener('click', ()=>{
+            deleteOfficer(officerID)
+        })
+
+        officerDiv.appendChild(officerPicture)
+        officerDiv.appendChild(officerName)
+        officerDiv.appendChild(officerTitle)
+        officerDiv.appendChild(deleteButton)
+
+        parent.appendChild(officerDiv)
     }
+}
+
+function deleteOfficer(id){
+    delete siteData.officers[id]
+    updateSiteJSON()
+    drawOfficersEditor()
+}
+
+function newOfficer(){
+    const officerIDs = Object.keys(siteData.officers)
+
+    let i=0
+    while(true){
+        const tryID = `officer${i}`
+
+        if(!officerIDs.includes(tryID)){
+            siteData.officers[tryID] = {
+                id: tryID,
+                name: "enter name",
+                title: "enter title"
+            }
+            break
+        }
+
+        i++
+    }
+
+    updateSiteJSON()
+    drawOfficersEditor()
 }
 
 function getStoryImage(story){
@@ -302,24 +464,6 @@ function newStory(){
                 content: `No content found!`,
                 shortDescription: `No short description found!`,
                 picture: "not_found.png",
-                startDate: {
-                    year: 2000,
-                    month: 1,
-                    day: 1,
-                    time: {
-                        hour: 0,
-                        minute: 0
-                    }
-                },
-                endDate: {
-                    year: 2000,
-                    month: 1,
-                    day: 1,
-                    time: {
-                        hour: 0,
-                        minute: 0
-                    }
-                }
             }
             break
         }
@@ -330,7 +474,6 @@ function newStory(){
 
     updateSiteJSON()
     drawStoryEditor()
-    sendSiteDataToIframe()
 }
 
 function deleteStory(id){
