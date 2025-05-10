@@ -18,6 +18,7 @@ function linkEditor(){
 
 function listenForEdits(){
     window.addEventListener('message', (event) => {
+        console.log(event)
         processSiteData(event.data.content)
     });
 }
