@@ -7,6 +7,7 @@ imagesPath = os.path.join(baseDir, "assets", "images")
 
 #writes image paths to js file
 outputPath = os.path.join(baseDir, "assets", "json", "imagePaths.json")
+print(outputPath)
 os.makedirs(os.path.dirname(outputPath), exist_ok=True)
 
 print(imagesPath)
