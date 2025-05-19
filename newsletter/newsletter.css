@@ -1,0 +1,18 @@
+.newsletter_paragraph{
+    
+}
+
+.newsletter_paragraph.indented{
+    text-indent: calc(var(--pss) * 3);
+}
+
+.newsletter_image{
+    height: calc(var(--pss)*20);
+    overflow: hidden;
+}
+
+.newsletter_image img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}

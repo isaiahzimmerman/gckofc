@@ -14,10 +14,8 @@ function processSiteData(data){
     console.log(params)
 
     const storyID = params.get("id")
-    console.log(data.stories)
-    console.log(data.stories[storyID])
 
-    if(!data.stories[storyID]){
+    if(!data?.stories[storyID]){
         console.log(`404 story not found`)
         return
     }

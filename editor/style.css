@@ -75,3 +75,8 @@ body{
     width: 100%;
     height: 100vh;
 }
+
+.newsletter_insert{
+    font-weight: bold;
+    cursor: pointer;
+}

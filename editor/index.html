@@ -11,21 +11,27 @@
 <body>
     <div class="editor_container">
         <div class="editor">
-            <h1>images <span>(show)</span></h1>
+            <h1>Images <span>(show)</span></h1>
             <div id="images"></div>
-            <h1>stories <span>(show)</span></h1>
+            <h1>Stories <span>(show)</span></h1>
             <div id="stories"></div>
             <button onclick="newStory()">create new story</button>
             <h1>Officers <span>(show)</span></h1>
             <div id="officers"></div>
             <div><button onclick="newOfficer()">new officer</button></div>
+
+            <h1>Newsletters</h1>
+            <div id="newsletters"></div>
+
             <div id="image_selector_bg" onclick="hideImageSelector()"></div>
             <div id="image_selector"></div>
+
             <a id="download_json"><h1>download</h1></a>
         </div>
         <div class="site_preview_container">
             <iframe src="/index.html" frameborder="0" class="site_preview" id="site_preview"></iframe>
         </div>
+        
     </div>
 </body>
 </html>

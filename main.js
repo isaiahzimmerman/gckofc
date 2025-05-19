@@ -154,10 +154,15 @@ function processBlog(posts){
     for(const postKey in posts){
         const post = posts[postKey]
 
+        const postLink = document.createElement("a")
+        postLink.href = `/newsletter/?id=${postKey}`
+
         const postTitle = document.createElement("div")
         postTitle.classList.add("monthly_newsletter_title")
         postTitle.innerText = post.title
 
-        blogDiv.appendChild(postTitle)
+        postLink.appendChild(postTitle)
+
+        blogDiv.appendChild(postLink)
     }
 }

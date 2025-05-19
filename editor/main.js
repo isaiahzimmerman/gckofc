@@ -22,12 +22,66 @@ function drawSiteFromSiteData(){
             drawImages()
             drawStoryEditor()
             drawOfficersEditor()
+            drawNewslettersEditor()
         })
+}
+
+function createNewsletterInsert(newsletterID, index){
+    const newsletterInsert = document.createElement("div")
+    newsletterInsert.innerHTML = "+"
+    newsletterInsert.classList.add("newsletter_insert")
+
+    newsletterInsert.addEventListener("click", ()=>{
+        siteData.blog_posts[newsletterID].content.splice(index, 0, {type: "body", text: "test"})
+
+        console.log(siteData.blog_posts[newsletterID].content)
+
+        updateSiteJSON()
+        drawNewslettersEditor()
+    })
+
+    return newsletterInsert
+}
+
+function drawNewslettersEditor(){
+    const newslettersDiv = document.getElementById("newsletters")
+    newslettersDiv.innerHTML = ""
+
+    for(const newsletterID in siteData.blog_posts){
+        const newsletter = siteData.blog_posts[newsletterID]
+
+        const newsletterDiv = document.createElement("div")
+
+        const newsletterTitle = makeElementEditable("h2", `newsletter_${newsletterID}_title`, newsletter.title, "blog_posts")
+
+        const newsletterContent = document.createElement("div")
+
+        newsletterContent.appendChild(createNewsletterInsert(newsletterID, 0))
+
+        for(const i in newsletter.content){
+            const item = newsletter.content[i]
+
+            if(item.type == "body"){
+                const newsletterContentItem = makeElementEditable("p", `newsletter_${newsletterID}_content_${i}_text`, item.text, "blog_posts")
+
+                newsletterContent.appendChild(newsletterContentItem)
+            }
+
+            newsletterContent.appendChild(createNewsletterInsert(newsletterID, parseInt(i) + 1))
+        }
+
+        newsletterDiv.appendChild(newsletterTitle)
+        newsletterDiv.appendChild(newsletterContent)
+
+        console.log(newsletterContent)
+        
+        newslettersDiv.appendChild(newsletterDiv)
+    }
 }
 
 function sendSiteDataToIframe(){
     const iframe = document.getElementById('site_preview');
-    iframe.contentWindow.postMessage({ content: siteData }, '*');
+    iframe.contentWindow.postMessage({ content: siteData, type: "editor_update" }, '*');
 }
 
 function updateSiteJSON(){
@@ -162,9 +216,21 @@ function setAttribute(htmlID, value, group){
     console.log(group)
     const idAttrs = htmlID.split("_")
 
-    siteData[group][idAttrs[1]][idAttrs[2]] = value
+    let i = 1
 
-    updateSiteJSON()
+    let toUpdate = siteData[group]
+
+    while(i < idAttrs.length - 1){
+        toUpdate = toUpdate[idAttrs[i]]
+        i++
+    }
+
+    const lastKey = idAttrs[idAttrs.length - 1]
+    console.log("Before update:", toUpdate[lastKey], "=>", value);
+
+    toUpdate[lastKey] = value;
+
+    updateSiteJSON();
 }
 
 function editElement(id, message, type, group){
@@ -401,10 +467,20 @@ function drawOfficersEditor(){
     }
 }
 
+function deleteOfficerWithConfirmation(){
+    window.prompt("test")
+}
+
 function deleteOfficer(id){
-    delete siteData.officers[id]
-    updateSiteJSON()
-    drawOfficersEditor()
+    const choice = prompt(`Are you sure you want to delete officer with id ${id}?\nTo confirm - type "yes"`)?.toLowerCase();
+
+    if (choice === 'yes') {
+        delete siteData.officers[id]
+        updateSiteJSON()
+        drawOfficersEditor()
+    }else{
+        alert("deletion canceled")
+    }    
 }
 
 function newOfficer(){
@@ -477,9 +553,15 @@ function newStory(){
 }
 
 function deleteStory(id){
-    delete siteData.stories[id];
+    const choice = prompt(`Are you sure you want to delete story with id ${id}?\nTo confirm - type "yes"`)?.toLowerCase();
 
-    updateSiteJSON()
-    drawStoryEditor()
-    sendSiteDataToIframe()
+    if (choice === 'yes') {
+        delete siteData.stories[id];
+
+        updateSiteJSON()
+        drawStoryEditor()
+        sendSiteDataToIframe()
+    }else{
+        alert("deletion canceled")
+    }
 }
